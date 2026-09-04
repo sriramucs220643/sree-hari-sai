@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>Bill Tracker</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast"></div>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+      <h1>BILL TRACKER</h1>
+      <p class="header-sub" id="headerLabel">Today's Bills</p>
+      <p class="header-date" id="headerDate">—</p>
+    </header>
+
+    <main class="main-layout">
+
+      <!-- LEFT COLUMN (desktop) / TOP (mobile): entry form -->
+      <section class="panel entry-panel">
+
+        <!-- Summary cards -->
+        <div class="summary-grid" id="summaryGrid">
+          <div class="summary-card total">
+            <span class="summary-label">Total Sales</span>
+            <span class="summary-value" id="sumTotal">₹0</span>
+          </div>
+          <div class="summary-card cash">
+            <span class="summary-label">Cash</span>
+            <span class="summary-value" id="sumCash">₹0</span>
+          </div>
+          <div class="summary-card gpay">
+            <span class="summary-label">GPay</span>
+            <span class="summary-value" id="sumGpay">₹0</span>
+          </div>
+          <div class="summary-card count">
+            <span class="summary-label">Total Bills</span>
+            <span class="summary-value" id="sumCount">0</span>
+          </div>
+        </div>
+
+        <!-- Add bill form (only shown for today) -->
+        <div class="add-bill-card" id="addBillCard">
+          <h2 class="section-title">Payment Method</h2>
+          <div class="method-buttons">
+            <button type="button" class="method-btn" id="btnCash" data-method="Cash">CASH</button>
+            <button type="button" class="method-btn" id="btnGpay" data-method="GPay">GPAY</button>
+          </div>
+
+          <h2 class="section-title">Amount</h2>
+          <div class="amount-input-wrap">
+            <span class="rupee">₹</span>
+            <input type="number" id="amountInput" inputmode="decimal" step="0.01" min="0" placeholder="0" />
+          </div>
+
+          <button type="button" id="addBillBtn" class="add-bill-btn">+ ADD BILL</button>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN (desktop) / BOTTOM (mobile): bills list -->
+      <section class="panel bills-panel">
+
+        <div class="date-nav">
+          <button type="button" id="prevDayBtn" class="nav-arrow" aria-label="Previous day">‹</button>
+          <span id="navDateLabel" class="nav-date">—</span>
+          <button type="button" id="nextDayBtn" class="nav-arrow" aria-label="Next day">›</button>
+        </div>
+
+        <h2 class="section-title bills-title" id="billsTitle">Today's Bills</h2>
+
+        <div id="billsListWrap">
+          <table class="bills-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Time</th>
+                <th>Method</th>
+                <th>Amount</th>
+                <th id="actionHeader" class="hidden">Action</th>
+              </tr>
+            </thead>
+            <tbody id="billsTableBody">
+              <!-- rows injected by script.js -->
+            </tbody>
+          </table>
+          <p id="emptyState" class="empty-state hidden">No bills recorded for this day.</p>
+        </div>
+
+        <div class="previous-days">
+          <h2 class="section-title">Previous Days</h2>
+          <label class="select-date-label" for="dateSelect">Select Date</label>
+          <select id="dateSelect">
+            <option value="">— Choose a date —</option>
+          </select>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- EDIT MODAL -->
+  <div class="modal-overlay hidden" id="editModalOverlay">
+    <div class="modal">
+      <h2>EDIT BILL</h2>
+
+      <h3 class="section-title">Payment Method</h3>
+      <div class="method-buttons">
+        <button type="button" class="method-btn" id="editBtnCash" data-method="Cash">Cash</button>
+        <button type="button" class="method-btn" id="editBtnGpay" data-method="GPay">GPay</button>
+      </div>
+
+      <h3 class="section-title">Amount</h3>
+      <div class="amount-input-wrap">
+        <span class="rupee">₹</span>
+        <input type="number" id="editAmountInput" inputmode="decimal" step="0.01" min="0" />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="saveEditBtn" class="add-bill-btn">SAVE CHANGES</button>
+        <button type="button" id="cancelEditBtn" class="secondary-btn">CANCEL</button>
+      </div>
+
+      <button type="button" id="deleteBillBtn" class="delete-btn">DELETE</button>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM MODAL -->
+  <div class="modal-overlay hidden" id="deleteModalOverlay">
+    <div class="modal small">
+      <p class="confirm-text">Are you sure you want to delete this bill?</p>
+      <div class="modal-actions">
+        <button type="button" id="confirmDeleteBtn" class="delete-btn">DELETE</button>
+        <button type="button" id="cancelDeleteBtn" class="secondary-btn">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay hidden" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
