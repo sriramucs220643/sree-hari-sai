@@ -226,9 +226,7 @@ function renderBillsTable(bills) {
     `;
     el.billsTableBody.appendChild(tr);
 
-    if (!state.isToday) {
-      tr.querySelector('.edit-link').addEventListener('click', () => openEditModal(bill));
-    }
+   tr.querySelector('.edit-link').addEventListener('click', () => openEditModal(bill));
   });
 }
 
