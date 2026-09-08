@@ -226,8 +226,17 @@ function renderBillsTable(bills) {
     `;
     el.billsTableBody.appendChild(tr);
 
-    if (!state.isToday) {
-      tr.querySelector('.edit-link').addEventListener('click', function (event) {
+tr.innerHTML = `
+  <td>${bill.sno}</td>
+  <td>${escapeHtml(bill.time)}</td>
+  <td><span class="method-pill ${bill.paymentMethod}">${bill.paymentMethod}</span></td>
+  <td class="amount-cell">${formatRupees(bill.amount)}</td>
+  <td><button type="button" class="edit-link" data-sno="${bill.sno}">Edit</button></td>
+`;
+
+el.billsTableBody.appendChild(tr);
+
+tr.querySelector('.edit-link').addEventListener('click', function (event) {
   event.preventDefault();
   event.stopPropagation();
   openEditModal(bill);
