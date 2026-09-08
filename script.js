@@ -8,7 +8,7 @@
  */
 
 // ⚠️ REPLACE with your deployed Apps Script Web App URL (ends in /exec)
-const API_URL = 'https://script.google.com/macros/s/AKfycbzCKHis1hywcj9vixvf98VlC1F9V2ufP1lBAMNggvRo9V4uiuzoB3au7gGDvxlnfHakBg/exec';
+const API_URL = 'PUT_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
 // ---------------------------------------------------------------------
 // STATE
@@ -195,7 +195,7 @@ async function loadBillsForCurrentDate() {
 function toggleAddBillVisibility() {
   el.addBillCard.classList.toggle('hidden', !state.isToday);
   el.billsTitle.textContent = state.isToday ? "Today's Bills" : 'Bills';
-  el.actionHeader.classList.remove('hidden');
+  el.actionHeader.classList.remove('hidden'); // bills can be edited/deleted for today and past days
 }
 
 function renderSummary(summary) {
@@ -222,11 +222,11 @@ function renderBillsTable(bills) {
       <td>${escapeHtml(bill.time)}</td>
       <td><span class="method-pill ${bill.paymentMethod}">${bill.paymentMethod}</span></td>
       <td class="amount-cell">${formatRupees(bill.amount)}</td>
-      ${state.isToday ? '' : `<td><button type="button" class="edit-link" data-sno="${bill.sno}">Edit</button></td>`}
+      <td><button type="button" class="edit-link" data-sno="${bill.sno}">Edit</button></td>
     `;
     el.billsTableBody.appendChild(tr);
 
-   tr.querySelector('.edit-link').addEventListener('click', () => openEditModal(bill));
+    tr.querySelector('.edit-link').addEventListener('click', () => openEditModal(bill));
   });
 }
 
