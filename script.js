@@ -195,7 +195,7 @@ async function loadBillsForCurrentDate() {
 function toggleAddBillVisibility() {
   el.addBillCard.classList.toggle('hidden', !state.isToday);
   el.billsTitle.textContent = state.isToday ? "Today's Bills" : 'Bills';
-  el.actionHeader.classList.remove('hidden'); // edit/delete only for past days per spec
+  el.actionHeader.classList.toggle('hidden', state.isToday); // edit/delete only for past days per spec
 }
 
 function renderSummary(summary) {
@@ -222,16 +222,13 @@ function renderBillsTable(bills) {
       <td>${escapeHtml(bill.time)}</td>
       <td><span class="method-pill ${bill.paymentMethod}">${bill.paymentMethod}</span></td>
       <td class="amount-cell">${formatRupees(bill.amount)}</td>
-      <td><button type="button" class="edit-link" data-sno="${bill.sno}">Edit</button></td>
+      ${state.isToday ? '' : `<td><button type="button" class="edit-link" data-sno="${bill.sno}">Edit</button></td>`}
     `;
     el.billsTableBody.appendChild(tr);
 
-
-tr.querySelector('.edit-link').addEventListener('click', function (event) {
-  event.preventDefault();
-  event.stopPropagation();
-  openEditModal(bill);
-});
+    if (!state.isToday) {
+      tr.querySelector('.edit-link').addEventListener('click', () => openEditModal(bill));
+    }
   });
 }
 
