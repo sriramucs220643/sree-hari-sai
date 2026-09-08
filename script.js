@@ -195,7 +195,7 @@ async function loadBillsForCurrentDate() {
 function toggleAddBillVisibility() {
   el.addBillCard.classList.toggle('hidden', !state.isToday);
   el.billsTitle.textContent = state.isToday ? "Today's Bills" : 'Bills';
-  el.actionHeader.classList.toggle('hidden', state.isToday); // edit/delete only for past days per spec
+  el.actionHeader.classList.remove('hidden');
 }
 
 function renderSummary(summary) {
