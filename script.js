@@ -227,7 +227,11 @@ function renderBillsTable(bills) {
     el.billsTableBody.appendChild(tr);
 
     if (!state.isToday) {
-      tr.querySelector('.edit-link').addEventListener('click', () => openEditModal(bill));
+      tr.querySelector('.edit-link').addEventListener('click', function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  openEditModal(bill);
+});
     }
   });
 }
