@@ -222,7 +222,7 @@ function renderBillsTable(bills) {
       <td>${escapeHtml(bill.time)}</td>
       <td><span class="method-pill ${bill.paymentMethod}">${bill.paymentMethod}</span></td>
       <td class="amount-cell">${formatRupees(bill.amount)}</td>
-      ${state.isToday ? '' : `<td><button type="button" class="edit-link" data-sno="${bill.sno}">Edit</button></td>`}
+      <td><button type="button" class="edit-link" data-sno="${bill.sno}">Edit</button></td>
     `;
     el.billsTableBody.appendChild(tr);
 
