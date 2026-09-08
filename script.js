@@ -232,7 +232,6 @@ tr.querySelector('.edit-link').addEventListener('click', function (event) {
   event.stopPropagation();
   openEditModal(bill);
 });
-    }
   });
 }
 
